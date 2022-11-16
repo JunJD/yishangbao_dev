@@ -79,6 +79,8 @@ const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
+const lessRegex = /\.less$/;
+const lessModuleRegex = /\.module\.less$/;
 
 const hasJsxRuntime = (() => {
   if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true') {
@@ -155,14 +157,14 @@ module.exports = function (webpackEnv) {
                   postcssAspectRatioMini({}),
                   postcssPxToViewport({
                     viewportWidth: 375, // (Number) The width of the viewport.
-                    viewportHeight: 1334, // (Number) The height of the viewport.
+                    viewportHeight: 812, // (Number) The height of the viewport.
                     unitPrecision: 3, // (Number) The decimal numbers to allow the REM units to grow to.
                     viewportUnit: 'vw', // (String) Expected units.
                     // selectorBlackList: ['.ignore', '.hairlines', '.antd'], // (Array) The selectors to ignore and leave as px.
                     selectorBlackList: ['.ignore', '.hairlines'], // (Array) The selectors to ignore and leave as px.
                     minPixelValue: 1, // (Number) Set the minimum pixel value to replace.
                     mediaQuery: false, // (Boolean) Allow px to be converted in media queries.
-                    // exclude: /(\/|\\)(node_modules)(\/|\\)/,
+                    exclude: /(\/|\\)(node_modules)(\/|\\)/,
                   }),
                   postcssWriteSvg({
                     utf8: false
@@ -383,6 +385,50 @@ module.exports = function (webpackEnv) {
           // match the requirements. When no loader matches it will fall
           // back to the "file" loader at the end of the loader list.
           oneOf: [
+            // 放在// 在这里引入要增加的全局less文件
+            {
+              test: lessRegex,
+              exclude: lessModuleRegex,
+              use:  [
+                ...getStyleLoaders(
+                  {
+                    importLoaders: 3,
+                    sourceMap: isEnvProduction
+                      ? shouldUseSourceMap
+                      : isEnvDevelopment,
+                    modules: {
+                      mode: 'icss',
+                    },
+                  },
+                  'less-loader'
+                ),
+                {
+                  loader: 'style-resources-loader',
+                  options: {
+                    patterns: path.resolve(__dirname, '../src/styles/index.less'),
+                  },
+                },
+              ],
+              // Don't consider CSS imports dead code even if the
+              // containing package claims to have no side effects.
+              // Remove this when webpack adds a warning or an error for this.
+              // See https://github.com/webpack/webpack/issues/6571
+              sideEffects: true,
+            },
+            // Adds support for CSS Modules, but using SASS
+            // using the extension .module.scss or .module.sass
+            {
+              test: lessModuleRegex,
+              use: getStyleLoaders(
+                {
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                  modules: true,
+                  getLocalIdent: getCSSModuleLocalIdent,
+                },
+                'less-loader'
+              ),
+            },
             // TODO: Merge this config once `image/avif` is in the mime-db
             // https://github.com/jshttp/mime-db
             {

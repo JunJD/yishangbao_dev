@@ -1,0 +1,89 @@
+/**
+ * Entry of basic styles
+ */
+
+ @import './../setting/var.less';
+ @import './../base/normalize.less';
+ @import './../base/animation.less';
+ @import './../tools//clearfix.less';
+ @import './../tools/ellipsis.less';
+ @import './../tools/hairline.less';
+ 
+ .ysb-clearfix {
+   .clearfix();
+ }
+ 
+ .ysb-ellipsis {
+   .ellipsis();
+ }
+ 
+ .ysb-multi-ellipsis--l2 {
+   .multi-ellipsis(2);
+ }
+ 
+ .ysb-multi-ellipsis--l3 {
+   .multi-ellipsis(3);
+ }
+ 
+ .ysb-safe-area-top {
+   padding-top: constant(safe-area-inset-top);
+   padding-top: env(safe-area-inset-top);
+ }
+ 
+ .ysb-safe-area-bottom {
+   padding-bottom: constant(safe-area-inset-bottom);
+   padding-bottom: env(safe-area-inset-bottom);
+ }
+ 
+ .ysb-haptics-feedback {
+   cursor: pointer;
+ 
+   &:active {
+     opacity: var(--ysb-active-opacity);
+   }
+ }
+ 
+ [class*='ysb-hairline'] {
+   &::after {
+     .hairline();
+   }
+ }
+ 
+ .ysb-hairline {
+   &,
+   &--top,
+   &--left,
+   &--right,
+   &--bottom,
+   &--surround,
+   &--top-bottom {
+     position: relative;
+   }
+ 
+   &--top::after {
+     border-top-width: var(--ysb-border-width);
+   }
+ 
+   &--left::after {
+     border-left-width: var(--ysb-border-width);
+   }
+ 
+   &--right::after {
+     border-right-width: var(--ysb-border-width);
+   }
+ 
+   &--bottom::after {
+     border-bottom-width: var(--ysb-border-width);
+   }
+ 
+   &,
+   &-unset {
+     &--top-bottom::after {
+       border-width: var(--ysb-border-width) 0;
+     }
+   }
+ 
+   &--surround::after {
+     border-width: var(--ysb-border-width);
+   }
+ }
