@@ -44,6 +44,14 @@ const babelRuntimeRegenerator = require.resolve('@babel/runtime/regenerator', {
   paths: [babelRuntimeEntry],
 });
 
+// 引入postCss插件
+const postcssAspectRatioMini = require('postcss-aspect-ratio-mini');
+const postcssPxToViewport = require('postcss-px-to-viewport-opt');
+const postcssWriteSvg = require('postcss-write-svg');
+const postcssPresetEnv = require('postcss-preset-env');
+const postcssViewportUnits = require('postcss-viewport-units');
+const cssnano = require('cssnano');
+
 // Some apps do not need the benefits of saving a web request, so not inlining the chunk
 // makes for a smoother build process.
 const shouldInlineRuntimeChunk = process.env.INLINE_RUNTIME_CHUNK !== 'false';
@@ -143,6 +151,30 @@ module.exports = function (webpackEnv) {
                       stage: 3,
                     },
                   ],
+                  // 引入postCss配置
+                  postcssAspectRatioMini({}),
+                  postcssPxToViewport({
+                    viewportWidth: 375, // (Number) The width of the viewport.
+                    viewportHeight: 1334, // (Number) The height of the viewport.
+                    unitPrecision: 3, // (Number) The decimal numbers to allow the REM units to grow to.
+                    viewportUnit: 'vw', // (String) Expected units.
+                    // selectorBlackList: ['.ignore', '.hairlines', '.antd'], // (Array) The selectors to ignore and leave as px.
+                    selectorBlackList: ['.ignore', '.hairlines'], // (Array) The selectors to ignore and leave as px.
+                    minPixelValue: 1, // (Number) Set the minimum pixel value to replace.
+                    mediaQuery: false, // (Boolean) Allow px to be converted in media queries.
+                    // exclude: /(\/|\\)(node_modules)(\/|\\)/,
+                  }),
+                  postcssWriteSvg({
+                    utf8: false
+                  }),
+                  postcssPresetEnv({}),
+                  postcssViewportUnits({}),
+                  cssnano({
+                    "cssnano-preset-advanced": {
+                      zindex: false,
+                      autoprefixer: false
+                    },
+                  }),
                   // Adds PostCSS Normalize as the reset css with default options,
                   // so that it honors browserslist config in package.json
                   // which in turn let's users customize the target behavior as per their needs.
