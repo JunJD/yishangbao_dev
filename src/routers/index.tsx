@@ -18,27 +18,32 @@ export interface RouteObject extends  NonIndexRouteObject{
 export const rootRouter: RouteObject[] = [
 	{
 		path: "/",
-		element: <Navigate to="/tabbar" />
+		element: <Navigate to="/tabbar/home" />
 	},
     {
       path: '/tabbar',
-      element: lazyLoad(React.lazy(() => import("./../page/tabbar")))
-    //   children: [
-    //     {
-    //       path: '/personal',
-    //       label: '我的',
-    //       element: <Navigate to="/login" />
-    //     },
-    //   ],
+      element: lazyLoad(React.lazy(() => import("./../page/tabbar"))),
+      children: [
+		{
+			path: "/tabbar/home",
+			element: lazyLoad(React.lazy(() => import("./../page/home"))),
+			label:'登录页面'
+		},
+		{
+			path: "/tabbar/offerprice",
+			element: lazyLoad(React.lazy(() => import("./../page/offerprice"))),
+			label:'报价页面'
+		},
+		{
+			path: "/tabbar/personal",
+			element: lazyLoad(React.lazy(() => import("./../page/personal"))),
+			label:'我的页面'
+		},
+	],
     },
 	{
 		path: "/404",
 		element: lazyLoad(React.lazy(() => import("./../404")))
-	},
-	{
-		path: "/home",
-		element: lazyLoad(React.lazy(() => import("./../page/home"))),
-		label:'登录页面'
 	},
 	{
 		path: "*",

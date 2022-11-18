@@ -1,17 +1,10 @@
 // import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { ConfigProvider } from 'react-vant';
-import zhCN from 'react-vant/es/locale/lang/zh-CN';
-
 import App from './App';
+import './styles/base/index.less'
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-
-const themeVars = {
-  buttonPrimaryBorderColor: '#951fff',
-  buttonPrimaryBackgroundColor: '#951fff',
-  tabbarHeight: '57px'
-};
+import './index.less'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,9 +12,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <BrowserRouter>
-  <ConfigProvider locale={zhCN} themeVars={themeVars} >
       <App />
-  </ConfigProvider>
   </BrowserRouter>
 );
 

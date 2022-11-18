@@ -1,26 +1,37 @@
 import { useState } from 'react'
-import { Tabbar } from 'react-vant'
-import IconYSB from './../../component/IconForBase64/IconYSB'
+import { Outlet, useNavigate } from "react-router-dom";
 import './index.less'
-const {Item} = Tabbar
+import Icon from './../../component/Icon';
+
+const TabbarItem = [
+  {name: 'home', label: '首页', icon: <Icon icon='icon-shucai1' />},
+  {name: 'offerprice', label: '报价', icon: <Icon icon='icon-80' />},
+  {name: 'personal', label: '我的', icon: <Icon icon='icon-wode' />},
+]
 
 const TabsHome = () => {
-
-  const [ active, setActive ] = useState('baojia')
+  const navigate = useNavigate()
+  const [ active, setActive ] = useState('home')
   return (
     <div className='bgc-tabbar'>
       <div className='body-home'>
+        <Outlet></Outlet>
       </div>
-      <Tabbar
-        zIndex={999}
-        style={{height:'49px',paddingBottom:'33px'}}
-        fixed
-        value={active}
-      >
-        <Item name='homePage' onClick={()=>setActive('homePage')} icon={<IconYSB highlight={active === 'homePage'} />}><span style={{fontSize: '14px'}} >首页</span></Item>
-        <Item name='homePage' onClick={()=>setActive('homePage')} icon={<IconYSB highlight={active === 'homePage'} />}><span style={{fontSize: '14px'}} >首页</span></Item>
-        <Item name='homePage' onClick={()=>setActive('homePage')} icon={<IconYSB highlight={active === 'homePage'} />}><span style={{fontSize: '14px'}} >首页</span></Item>
-      </Tabbar>
+      <div className='ysb-tabbar ysb-tabbar--fixed pb33'>
+        { TabbarItem.map(item=>
+            <div 
+              key={item.name}
+              className={item.name === active?'ysb-tabbar-item ysb-tabbar-item--active': 'ysb-tabbar-item'}
+              onClick={()=>{ setActive( item.name ); navigate(`/tabbar/${item.name}`) }}
+            >
+              {item.icon}
+              {item.label}
+            </div>
+          )
+        }
+        
+        
+      </div>
     </div>
   )
 }

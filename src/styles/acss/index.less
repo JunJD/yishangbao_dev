@@ -1,0 +1,98 @@
+// padding
+
+@base: 0px;
+
+.Fun(@n,@i: 1) when (@i =< @n) {
+    .pb@{i} {
+        padding-bottom:  @base + @i !important
+    }
+    .pt@{i} {
+        padding-top:  @base + @i !important
+    }
+    .pl@{i} {
+        padding-left:  @base + @i !important
+    }
+    .pr@{i} {
+        padding-right:  @base + @i !important
+    }
+    .ptb@{i} {
+        padding-bottom:  @base + @i !important;
+        padding-top:  @base + @i !important
+    }
+    .plr@{i} {
+        padding-left:  @base + @i !important;
+        padding-right:  @base + @i !important
+    }
+    .mb@{i} {
+        margin-bottom:  @base + @i !important
+    }
+    .mt@{i} {
+        margin-top:  @base + @i !important
+    }
+    .ml@{i} {
+        margin-left:  @base + @i !important
+    }
+    .mr@{i} {
+        margin-right:  @base + @i !important
+    }
+    .mtb@{i} {
+        margin-bottom:  @base + @i !important;
+        margin-top:  @base + @i !important
+    }
+    .mlr@{i} {
+        margin-left:  @base + @i !important;
+        margin-right:  @base + @i !important
+    }
+    .Fun(@n,(@i+1))
+};
+
+.FunSize(@n,@i: 1) when (@i =< @n) {
+    .fs@{i}{
+        font-size: @base + @i !important;
+    }
+
+    .h@{i}{
+        height: @base + @i !important;
+    }
+
+    .lh@{i}{
+        line-height: @base + @i !important;
+    }
+
+    .w@{i}{
+        width: @base + @i !important
+    }
+    .FunSize(@n,(@i+1));
+};
+
+.FunWeight(@n,@i: 100) when (@i =< @n){
+    .fw@{i}{
+       font-weight:  @i
+    }  
+    .FunWeight(@n,(@i+100));
+};
+
+.FunWeight(700);
+.FunSize(400);
+.Fun(200); 
+
+// 布局
+.flex--column{
+    display: flex !important;
+    flex-direction: column;
+}
+.flex--row{
+    display: flex !important;
+    flex-direction: row !important;
+}
+.flex--aitm-start{
+    align-items: flex-start !important;
+}
+.flex--aitm-center{
+    align-items: center !important;
+}
+
+// 文字
+.tal{
+    text-align: left !important
+}

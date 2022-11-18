@@ -1,0 +1,37 @@
+:root {
+    --ysb-card-size: var(--ysb-font-size-md);
+    --ysb-card-color: var(--ysb-background-3);
+    --ysb-card-background-color: var(--ysb-background-2);
+    --ysb-card-radius: var(--ysb-radius-lg);
+    --ysb-card-header-color: #E1E1FF;
+    --ysb-avatar-label-color: var(--ysb-gray-4);
+    --ysb-phone-number-color: var(--ysb-gray-7);
+    --ysb-avatar-label-background-color: var( --ysb-gray-10);
+  }
+
+  .home-container{
+    max-width: 375px;
+    text-align: center;
+    .ysb-avatar{
+      position: relative;
+      img{
+        width: 49px;
+        height: 49px;
+      }
+    }
+  }
+  .phone-number{
+    color: var(--ysb-phone-number-colo);
+  }
+
+  .ysb-avatar-label{
+    background-color: var(--ysb-avatar-label-background-color);
+    color:var(--ysb-avatar-label-color);
+    margin-top: -10px !important;
+  }
+  
+  .ysb-card {
+    &-header {
+      background-color: var(--ysb-card-header-color);
+    }
+  }

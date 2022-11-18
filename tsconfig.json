@@ -39,5 +39,5 @@
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "craco.config.js"],
-	"exclude": ["node_modules", "dist", "**/*.js"]
+	"exclude": ["node_modules", "dist", "**/*.js", "utils/index.ts"]
 }
