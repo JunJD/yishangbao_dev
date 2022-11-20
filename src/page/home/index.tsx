@@ -1,14 +1,22 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 import Marquee from 'react-fast-marquee';
-import { useLocation } from 'react-router-dom';
-import avatar from './base64'
-import { req } from './../../utils/req';
-import YsbCard from './../../components/ysbCard';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { req } from '@utils/req';
+import YsbCard from '@components/ysbCard';
+import Icon from '@src/component/Icon'
+import ToastClass from '@components/ysbToast';
 import "./index.less"
-import Icon from './../../component/Icon'
+import avatar from './base64'
+
 
 interface FlagNameMapType{
   [supplierFlag: number] : string,
+}
+interface IPData {
+  supplierFlag?: number,
+  suppName?: string,
+  suppCode?: number,
+  phoneNumber?: string
 }
 
 const FlagNameMap: FlagNameMapType = {
@@ -17,15 +25,22 @@ const FlagNameMap: FlagNameMapType = {
   3:'父供'
 }
 
-interface IPData {
-  supplierFlag?: number,
-  suppName?: string,
-  suppCode?: number,
-  phoneNumber?: string
-}
+const synergyEntrance = [
+  {label: '采购进货', icon: 'icon-goumaicantuan', key:'/purchaseout'},
+  {label: '采购退货', icon: 'icon-tuihuo', key: '/purchaseout'},
+  {label: '商品报价', icon: 'icon-query1', key:'/goodsNew'},
+  {label: '付款查询', icon: 'icon-qiyedaifuchaxun', key:'/purchaseout'},
+  {label: '对账开票', icon: 'icon-peiduizhanghuguanli', key:'/purchaseout'},
+  {label: '预约查询', icon: 'icon-yuyuechaxun', key:'/purchaseout'},
+]
+const warnEntrance =   [
+  {label: '库存查询', icon: 'icon-dianzitihuoicon-15'},
+  {label: '销售查询', icon: 'icon-xiaoshoushendan'}
+]
 
 const Home: FC = () => {
   const location = useLocation()
+  const navigate = useNavigate()
   const infoNumber = useMemo(()=>(
     [
       {label: '待对账(元)', value: 12},
@@ -48,9 +63,9 @@ const Home: FC = () => {
   
   useEffect(()=>{
     const arr: string[] = GetRequestToken();
-    localStorage.setItem('token', arr[1])
+    localStorage.setItem('token', arr[1] || location.state.token )
     getInfo()
-  },[GetRequestToken])
+  },[GetRequestToken, location])
 
   const getInfo = async() => {
     try {
@@ -59,8 +74,8 @@ const Home: FC = () => {
         setPData(res.result)
         localStorage.setItem('suppCode', res.result.suppCode)
       }
-    } catch (e) {
-      console.warn(e)
+    } catch (e: any) {
+      ToastClass.info(e.message, 1000)
     }
   }
 
@@ -120,22 +135,37 @@ const Home: FC = () => {
         </div>
       </YsbCard>
 
-      {/* ---------- */}
+      {/* #业务协同------ */}
 
       <YsbCard className='h190 mt12' title="业务协同">
-          <div className='flex--row'>
-            <div className='fs36'>
-              <Icon icon='icon-goumaicantuan'/>
-            </div>
-            <div className='fs36'>
-              <Icon icon='icon-tuihuo'/>
-            </div>
-            <div className='fs36'>
-              <Icon icon='icon-query1'/>
-            </div>
-            <div className='fs36'>
-              <Icon icon='icon-yuyuechaxun'/>
-            </div>
+          <div className='card_wrap flex--row pt12'>
+            {synergyEntrance.map(item=>(
+              <div 
+                key={item.key} 
+                className='c4_item fs30 w93' 
+                onClick={()=>navigate(item.key)} 
+              >
+                <Icon icon={item.icon}/>
+                <div className='fs14'>
+                  {item.label}
+                </div>
+              </div>
+            ))}
+          </div>
+      </YsbCard >
+
+      {/* #数据预警------ */}
+
+      <YsbCard className='h118 mt16' title="数据预警">
+          <div className='card_wrap flex--row pt12'>
+            {warnEntrance.map(item=>(
+              <div className='c4_item fs30 w93'>
+                <Icon icon={item.icon}/>
+                <div className='fs14'>
+                  {item.label}
+                </div>
+              </div>
+            ))}
           </div>
       </YsbCard >
     </div>

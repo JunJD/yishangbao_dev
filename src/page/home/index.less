@@ -35,3 +35,32 @@
       background-color: var(--ysb-card-header-color);
     }
   }
+
+
+
+
+
+
+
+
+  
+  .card_wrap { // 大盒子
+    width: 98%;
+    flex-wrap: wrap;
+    justify-content: flex-start; // 替代原先的space-between布局方式
+  }
+
+  @basepx: 5; // 每个元素间隔 5px
+  @num: 4; // 每行 4个
+  @c_item: @base + (@basepx * (@num - 1));
+
+  .c4_item{
+    flex: 1;
+    margin: 0 @basepx+@base @basepx+@base+7 0; // 间隙为5px
+    width: calc((100% - @c_item) / @num) ;  // 这里的15px = (分布个数4-1)*间隙5px, 可以根据实际的分布个数和间隙区调整
+    min-width: calc((100% - @c_item) / @num); // 加入这两个后每个item的宽度就生效了
+    max-width: calc((100% - @c_item) / @num); // 加入这两个后每个item的宽度就生效了
+    &:nth-child(4*n) { // 去除第4n个的margin-right 这里的4 读不到@sum
+      margin-right: 0;
+    }
+  }

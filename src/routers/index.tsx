@@ -42,6 +42,16 @@ export const rootRouter: RouteObject[] = [
 	],
     },
 	{
+		path: "/purchaseout",
+		element: lazyLoad(React.lazy(() => import("./../page/purchaseout"))),
+		label:'采购退货'
+	},
+	{
+		path: "/goodsNew",
+		element: lazyLoad(React.lazy(() => import("./../page/goodsNew"))),
+		label:'发布新品'
+	},
+	{
 		path: "/404",
 		element: lazyLoad(React.lazy(() => import("./../404")))
 	},

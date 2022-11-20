@@ -54,22 +54,36 @@ function getAdditionalModulePaths(options = {}) {
  *
  * @param {*} options
  */
+// function getWebpackAliases(options = {}) {
+//   const baseUrl = options.baseUrl;
+
+//   if (!baseUrl) {
+//     return {};
+//   }
+
+//   const baseUrlResolved = path.resolve(paths.appPath, baseUrl);
+
+//   if (path.relative(paths.appPath, baseUrlResolved) === '') {
+//     return {
+//       src: paths.appSrc,
+//     };
+//   }
+// }
 function getWebpackAliases(options = {}) {
   const baseUrl = options.baseUrl;
 
   if (!baseUrl) {
     return {};
   }
-
-  const baseUrlResolved = path.resolve(paths.appPath, baseUrl);
-
-  if (path.relative(paths.appPath, baseUrlResolved) === '') {
-    return {
-      src: paths.appSrc,
-    };
-  }
+  const { paths } = options;
+  const keys = Object.keys(paths);
+  const res = {};
+  keys.forEach(k => {
+    const p = k.replace('/*', '');
+    res[p] = path.resolve(paths[k][0].replace('*', ''));
+  });
+  return res;
 }
-
 /**
  * Get jest aliases based on the baseUrl of a compilerOptions object.
  *

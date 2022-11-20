@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Loading } from "react-vant";
+import Loading from "@src/component/Loading";
 
 /**
  * @description 路由懒加载
@@ -10,7 +10,9 @@ const lazyLoad = (Comp: React.LazyExoticComponent<any>): React.ReactNode => {
 	return (
 		<Suspense
 			fallback={
-				<Loading type="spinner" />
+				// <div style={{}} >
+					<Loading/>
+				// </div>
 			}
 		>
 			<Comp />

@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Outlet, useNavigate } from "react-router-dom";
+import Icon from '@src/component/Icon';
+import { getStorage } from '@src/utils';
 import './index.less'
-import Icon from './../../component/Icon';
 
 const TabbarItem = [
   {name: 'home', label: '首页', icon: <Icon icon='icon-shucai1' />},
@@ -22,7 +23,7 @@ const TabsHome = () => {
             <div 
               key={item.name}
               className={item.name === active?'ysb-tabbar-item ysb-tabbar-item--active': 'ysb-tabbar-item'}
-              onClick={()=>{ setActive( item.name ); navigate(`/tabbar/${item.name}`) }}
+              onClick={()=>{ setActive( item.name ); navigate(`/tabbar/${item.name}`,{ state: {  suppCode: getStorage('suppCode'),token: getStorage('token') } }) }}
             >
               {item.icon}
               {item.label}

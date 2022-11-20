@@ -1,5 +1,5 @@
 import React from 'react';
-import Router from "./routers";
+import Router from "@src/routers";
 // import AuthRouter from '@src/routers/utils/authRouter';
 import './App.less'
 
