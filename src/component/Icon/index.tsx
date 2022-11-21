@@ -1,7 +1,7 @@
 import React from 'react'
 import { createFromIconfontCN } from '@react-vant/icons'
 const IconFont = createFromIconfontCN(
-  '//at.alicdn.com/t/c/font_3777953_zs6j4og613j.js'
+  '//at.alicdn.com/t/c/font_3777953_28vy3xyqbf1.js'
 )
 const Icon = (props: { icon: string }) => {
     const { icon } = props;

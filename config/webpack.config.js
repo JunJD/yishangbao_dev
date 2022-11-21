@@ -157,7 +157,7 @@ module.exports = function (webpackEnv) {
                   postcssAspectRatioMini({}),
                   postcssPxToViewport({
                     viewportWidth: 375, // (Number) The width of the viewport.
-                    // viewportHeight: 812, // (Number) The height of the viewport.
+                    viewportHeight: 812, // (Number) The height of the viewport.
                     unitPrecision: 3, // (Number) The decimal numbers to allow the REM units to grow to.
                     viewportUnit: 'vw', // (String) Expected units.
                     // selectorBlackList: ['.ignore', '.hairlines', '.antd'], // (Array) The selectors to ignore and leave as px.

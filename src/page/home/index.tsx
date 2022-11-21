@@ -139,9 +139,9 @@ const Home: FC = () => {
 
       <YsbCard className='h190 mt12' title="业务协同">
           <div className='card_wrap flex--row pt12'>
-            {synergyEntrance.map(item=>(
+            {synergyEntrance.map((item, index)=>(
               <div 
-                key={item.key} 
+                key={`${item.key}_${index}`} 
                 className='c4_item fs30 w93' 
                 onClick={()=>navigate(item.key)} 
               >
@@ -158,8 +158,8 @@ const Home: FC = () => {
 
       <YsbCard className='h118 mt16' title="数据预警">
           <div className='card_wrap flex--row pt12'>
-            {warnEntrance.map(item=>(
-              <div className='c4_item fs30 w93'>
+            {warnEntrance.map((item, index)=>(
+              <div key={`${item.label}_${index}`} className='c4_item fs30 w93'>
                 <Icon icon={item.icon}/>
                 <div className='fs14'>
                   {item.label}
