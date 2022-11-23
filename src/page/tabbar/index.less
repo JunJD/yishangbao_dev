@@ -2,7 +2,7 @@
   --ysb-tabbar-height: 51px;
   --ysb-tabbar-z-index: 999;
   --ysb-tabbar-background: var(--ysb-background-9);
-  --ysb-tabbar-item-text-color: #d79898;
+  --ysb-tabbar-item-text-color: var(--ysb-text-color-3);
   --ysb-tabbar-item-font-size: 14px;
   --ysb-tabbar-item-line-height: 28px;
 }
@@ -13,10 +13,10 @@
     overflow-x: hidden;
     height: 810px;
     position: relative;
-    // width: 375px;
+    // width: var(--ysb-base-width);
     overflow: hidden;
     .body-home{
-        width: 375px;
+        width: var(--ysb-base-width);
         height: 729px;
         background-color: var(--ysb-tabbar-background);
         overflow-x: hidden;
@@ -25,9 +25,9 @@
         z-index: var(--ysb-tabbar-z-index);
         display: flex;
         box-sizing: content-box;
-        width: 375px;
+        width: var(--ysb-base-width);
         height: var(--ysb-tabbar-height);
-        background-color: #ffffff;
+        background-color: var(--ysb-white);
         &--fixed {
           position: fixed;
           bottom: 0;

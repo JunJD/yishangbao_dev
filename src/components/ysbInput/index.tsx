@@ -8,7 +8,7 @@ interface IYsbInputProps {
 
 const YsbInput: FC<IYsbInputProps> = ({ prefix, suffix}) => {
     return (
-        <div className="inputContainer flex--row flex-justify-space-around flex--aitm-center fs16 lh32 w343 h32" >
+        <div className="inputContainer flex--row justify-around items-center fs16 lh32 w343 h32" >
             {prefix}
             <input className="inputEle" type="text" />
             {suffix}

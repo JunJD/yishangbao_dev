@@ -83,29 +83,76 @@
 .FunSize(400);
 .Fun(200); 
 
-// 布局
-.flex--column{
+
+// #flex布局-----------------------------------------------------------------------
+
+// 控制 Flex 子项的方向的功能类
+.flex--col{
     display: flex !important;
     flex-direction: column;
+}
+.flex-col-reverse{
+    flex-direction: column-reverse !important;
 }
 .flex--row{
     display: flex !important;
     flex-direction: row !important;
 }
-.flex--aitm-start{
-    align-items: flex-start !important;
-}
-.flex--aitm-center{
-    align-items: center !important;
+.flex-row-reverse{
+    flex-direction: row-reverse !important;
 }
 
-.flex-justify-space-evenly {
+// 用于控制 Flex 和网格项如何沿着容器的横轴定位的功能类。
+.items-start{
+    align-items: flex-start !important;
+}
+.items-center{
+    align-items: center !important;
+}
+.items-end{
+    align-items: flex-end !important;
+}
+.items-baseline	{
+    align-items: baseline !important;
+}
+.items-stretch	{
+    align-items: stretch !important;
+}
+
+// 用于控制 flex 和 grid 项目如何沿着容器的主轴定位的功能类。
+.justify-start{
+    justify-content: flex-start !important;
+}
+
+.justify-end{
+    justify-content: flex-end !important;
+}
+
+.justify-center{
+    justify-content: center !important;
+}
+
+.justify-between{
+    justify-content: space-between !important;
+}
+
+.justify-evenly {
     justify-content: space-evenly !important
 }
-.flex-justify-space-around {
+.justify-around {
     justify-content: space-around !important
 }
 
+// 用于控制弹性项换行方式的功能类。
+.flex-wrap{
+    flex-wrap: wrap !important;
+}
+.flex-wrap-reverse{
+    flex-wrap: wrap-reverse !important;
+}
+.flex-nowrap{
+    flex-wrap: nowrap !important;
+}
 
 
 // 文字

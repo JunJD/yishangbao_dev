@@ -63,7 +63,7 @@ const Home: FC = () => {
   
   useEffect(()=>{
     const arr: string[] = GetRequestToken();
-    localStorage.setItem('token', arr[1] || location.state.token )
+    localStorage.setItem('token', arr[2] || location.state.token )
     getInfo()
   },[GetRequestToken, location])
 
@@ -81,10 +81,10 @@ const Home: FC = () => {
 
   return (
     <div className='home-container plr12 pt12'>
-      <YsbCard className='h188 flex--column'>
-        <div className='ysb-card ysb-card-header flex--row flex--aitm-center h38 plr12 pt8 pb4 fs12'>
+      <YsbCard className='h188 flex--col'>
+        <div className='ysb-card ysb-card-header flex--row items-center h38 plr12 pt8 pb4 fs12'>
           <div className='w61 fs14'><Icon icon='icon-bell' />通知</div>
-          <div className='w258 flex--column flex--aitm-start' style={{ boxSizing: 'content-box',borderLeft:'1px #7564E9 solid'}} > 
+          <div className='w258 flex--col items-start' style={{ boxSizing: 'content-box',borderLeft:'1px #7564E9 solid'}} > 
             <div className='plr8'>
               <Marquee pauseOnHover gradient={false}>
  			         dingjunjie审核通过了<span style={{color:'red'}} >重庆1123xx公司</span>的报价
@@ -99,14 +99,14 @@ const Home: FC = () => {
           </div>
         </div>
 
-        <div className='flex--row flex--aitm-start pt12'>
-          <div className='ysb-avatar flex--column flex--aitm-center h55 w61 pl12'>
+        <div className='flex--row items-start pt12'>
+          <div className='ysb-avatar flex--col items-center h55 w61 pl12'>
             <img src={avatar} alt='' />
             <div className="ysb-avatar-label w25 fs10 plr5">
               {FlagNameMap[pData?.supplierFlag!]}
             </div>
           </div>
-          <div className='flex--column flex--aitm-start pt6 pl6 fs16'>
+          <div className='flex--col items-start pt6 pl6 fs16'>
             <div className='fw600 fs16 lh18' >
               { pData.suppName }
             </div>
@@ -126,7 +126,7 @@ const Home: FC = () => {
 
         <div className='flex--row pt24'>
           { infoNumber.map(item=>(
-            <div key={item.label} className='flex--column flex--aitm-center w125'>
+            <div key={item.label} className='flex--col items-center w125'>
               <div className='fs20 fw600'>{item.value}</div>
               <div className='fs14'>{item.label}</div>
             </div>
