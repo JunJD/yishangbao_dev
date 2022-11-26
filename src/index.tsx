@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import '@src/styles/base/index.less'
 import reportWebVitals from './reportWebVitals';
 import App from './App';
+import 'normalize.css'
 import './index.less'
 
 const root = ReactDOM.createRoot(

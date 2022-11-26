@@ -1,16 +1,24 @@
-import React from 'react'
+import React, { FC, memo } from 'react'
 import { createFromIconfontCN } from '@react-vant/icons'
+import { IconBaseProps } from '@react-vant/icons/es/IconBase';
+
+interface IIconProps {
+  icon: string,
+}
+type IProps = Partial<IconBaseProps & IIconProps>
+
 const IconFont = createFromIconfontCN(
-  '//at.alicdn.com/t/c/font_3777953_28vy3xyqbf1.js'
+  '//at.alicdn.com/t/c/font_3777953_aa417dk8w9.js'
 )
-const Icon = (props: { icon: string }) => {
-    const { icon } = props;
+
+const Icon: FC<IProps> = (props) => {
+    const { icon, className } = props;
     const antIcon: { [key: string]: any } = IconFont;
 
-    if(!antIcon[icon]){
-        return <IconFont name={icon} />
+    if(!antIcon[icon!]){
+        return <IconFont className={className} name={icon} />
     }
     return React.createElement(icon?antIcon[icon]:antIcon["home"]);
 };
 
-export default Icon
+export default memo(Icon)

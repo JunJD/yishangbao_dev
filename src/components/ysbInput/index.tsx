@@ -1,19 +1,22 @@
-import React, { FC, ReactNode } from "react";
+import classNames from "classnames";
+import { FC, HtmlHTMLAttributes, memo, ReactNode } from "react";
 import './index.less'
-
 interface IYsbInputProps {
-    prefix?: ReactNode,
-    suffix?: ReactNode,
+    prele: ReactNode,
+    suffix: ReactNode,
 }
 
-const YsbInput: FC<IYsbInputProps> = ({ prefix, suffix}) => {
+type IProps = Partial<HtmlHTMLAttributes<HTMLInputElement> & IYsbInputProps>
+
+const YsbInput: FC<IProps> = ({ prele, suffix, className, ...reset}) => {
+    const classs = classNames("inputContainer flex--row items-center fs16 lh30 w343 h32", className)
     return (
-        <div className="inputContainer flex--row justify-around items-center fs16 lh32 w343 h32" >
-            {prefix}
-            <input className="inputEle" type="text" />
+        <div className={classs} >
+            {prele}
+            <input {...reset} className="inputEle" type="text" />
             {suffix}
         </div>
     )
 }
 
-export default YsbInput
+export default memo(YsbInput)

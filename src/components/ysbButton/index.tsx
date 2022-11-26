@@ -1,17 +1,25 @@
-import React, { FC, ReactNode } from "react";
-
-type YsbButtonType = 'success' | 'info' | 'fail'
+import classNames from "classnames";
+import { FC, HtmlHTMLAttributes, memo } from "react";
+import './index.less'
+type YsbButtonType = 'primary' | 'info' | 'fail'
 
 interface IYsbButtonProps {
-    children?: ReactNode;
     type?: YsbButtonType
 }
-const YsbButton: FC<IYsbButtonProps> = (props) => {
-    const { children, type } = props
 
+type IProp = Partial<IYsbButtonProps & HtmlHTMLAttributes<HTMLButtonElement>>
+
+const YsbButton: FC<IProp> = (props) => {
+    const { children, type, className, ...reset } = props
+    const classs = classNames('ysb-button plr14', className, {
+        [`ysb-button-${type}`]: type
+    })
     return (
-        <button>{children}</button>
+        <button {...reset} className={classs} >{children}</button>
     )
 }
+YsbButton.defaultProps={
+    type: 'primary'
+}
 
-export default YsbButton
+export default memo(YsbButton)
