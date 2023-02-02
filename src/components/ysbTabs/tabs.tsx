@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { FC, memo, ReactNode, useEffect, useMemo, useState } from "react";
+import React, { FC, memo, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import {IYsbTabPabsPorps} from './tabPane'
 // import usePrevious from '@src/hooks/usePrvious'
 interface IYsbTabsPorps {
@@ -9,7 +9,39 @@ interface IYsbTabsPorps {
 
 const YsbTabs: FC<IYsbTabsPorps> = ({children, defaultActive}) => {
     const [active, setActive] = useState(defaultActive)
-
+    const lineRef = useRef(null)
+    useEffect(()=>{
+        if ('geolocation' in navigator) {
+            navigator.geolocation.watchPosition((position) => {
+                console.log(position.coords.latitude, position.coords.longitude)
+            });
+          } else {
+            /* geolocation 不存在 */
+          }
+        const resizeObserver = new ResizeObserver((entries) => {
+            const calcBorderRadius = (size1: number, size2: number) =>
+              `${Math.min(100, size1 / 10 + size2 / 10)}px`;
+          
+            for (const entry of entries) {
+              if (entry.borderBoxSize && false) {
+                const size = calcBorderRadius(
+                  entry.borderBoxSize[0].inlineSize,
+                  entry.borderBoxSize[0].blockSize
+                );
+                console.log(size,'size')
+              } else {
+                const borderRadius = calcBorderRadius(
+                  entry.contentRect.width,
+                  entry.contentRect.height
+                );
+                console.log(borderRadius, 'borderRadius')
+              }
+            }
+            
+          });
+          
+          resizeObserver.observe(lineRef.current!);
+    },[])
     const renderTitle = useMemo(()=>{
         return React.Children.map(children,(child,index)=>{
             const childElement = child as React.FunctionComponentElement<IYsbTabPabsPorps>
@@ -60,12 +92,13 @@ const YsbTabs: FC<IYsbTabsPorps> = ({children, defaultActive}) => {
             [`w${tabNum}`]: true,
         })
     },[tabNum])
-
+    const clientWidth_ref = useRef(document.documentElement.clientWidth)
     useEffect(()=>{
+        const cst =  clientWidth_ref.current / 375
         let doc = Array.from(document.getElementsByClassName("titleItem"))
         const {clientWidth: width, offsetLeft: left} = (doc.find(item=>item.id===active) as any)
         setTabLeft(left)
-        setTabNum(width)
+        setTabNum(Math.floor(width / cst))
     },[active])
 
     return (
@@ -73,7 +106,7 @@ const YsbTabs: FC<IYsbTabsPorps> = ({children, defaultActive}) => {
             <div className="ysbtabs-container-title pt12 pb6 flex--row justify-around fw550">
                 {renderTitle}
             </div>
-            <div className={lineClass} style={lineStyle}/>
+            <div ref={lineRef} className={lineClass} style={lineStyle}/>
             {renderChildren}
         </div>
     )

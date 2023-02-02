@@ -1,4 +1,4 @@
-import { FC, HtmlHTMLAttributes, ReactNode, useMemo } from "react";
+import { FC, HtmlHTMLAttributes, useMemo } from "react";
 import classNames from "classnames";
 import './index.less'
 interface IysbCardProps {

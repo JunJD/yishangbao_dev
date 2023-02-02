@@ -1,9 +1,11 @@
 import {useEffect,RefObject} from 'react'
-function useClickOutside(ref: RefObject<HTMLElement>, handler: Function) {
+function useClickOutside(refs: RefObject<HTMLElement>[], handler: Function) {
     useEffect(() => {
       const listener = (event: MouseEvent) => {
-        if (ref.current?.contains(event.target as HTMLElement)) {
-          return  //点击到选中的ref直接return
+        for(let ref of refs){
+          if (ref.current?.contains(event.target as HTMLElement)) {
+            return  //点击到选中的ref直接return
+          }
         }
         handler(event)
       }
@@ -11,7 +13,7 @@ function useClickOutside(ref: RefObject<HTMLElement>, handler: Function) {
       return () => {
         document.removeEventListener('click', listener) //处理函数
       }
-    }, [ref, handler])
+    }, [refs, handler])
   }
   
   export default useClickOutside

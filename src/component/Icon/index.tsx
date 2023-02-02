@@ -8,7 +8,7 @@ interface IIconProps {
 type IProps = Partial<IconBaseProps & IIconProps>
 
 const IconFont = createFromIconfontCN(
-  '//at.alicdn.com/t/c/font_3777953_aa417dk8w9.js'
+  '//at.alicdn.com/t/c/font_3777953_83ckj6d2nm2.js'
 )
 
 const Icon: FC<IProps> = (props) => {

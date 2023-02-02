@@ -1,0 +1,79 @@
+.calendar-content {
+    margin: 0 20px;
+    height: 350px;
+
+    .calendar-bar {
+        display        : flex;
+        align-items    : center;
+        justify-content: space-between;
+        margin-bottom  : 30px;
+        padding        : 10px 15px;
+
+        .bar-left {
+            font-weight: bold;
+            color      : #999999;
+            font-size  : 18px;
+        }
+
+        .bar-right {
+            display    : flex;
+            align-items: center;
+
+            .showtext {
+                color      : #999999;
+                font-weight: bold;
+                font-size  : 18px;
+                display    : inline-block;
+                width      : 60px;
+            }
+        }
+
+        .close {
+            font-weight: bold;
+            color      : #333333;
+            font-size  : 18px;
+        }
+    }
+
+    .calendar-data-content {
+        overflow: hidden;
+
+        .everyday {
+            font-size  : 16px;
+            list-style : none;
+            width      : 14%;
+            height     : 38px;
+            float      : left;
+            text-align : center;
+            position   : relative;
+            font-weight: 700;
+
+            .everyday-text {
+                display    : inline-block;
+                height     : 34px;
+                width      : 34px;
+                text-align : center;
+                line-height: 34px;
+            }
+
+        }
+
+        .active {
+            color: red;
+        }
+
+        .check {
+            background-color: skyblue;
+            color           : #ffffff;
+            border-radius   : 4px;
+        }
+    }
+
+}
+
+.calendar-modal {
+    .am-modal-content {
+        border-top-left-radius : 24px;
+        border-top-right-radius: 24px;
+    }
+}
